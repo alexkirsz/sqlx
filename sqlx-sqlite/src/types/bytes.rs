@@ -13,6 +13,11 @@ impl Type<Sqlite> for [u8] {
     }
 
     fn compatible(ty: &SqliteTypeInfo) -> bool {
+        eprintln!(
+            "u8 compatible: {:?}: {:?}",
+            ty.0,
+            matches!(ty.0, DataType::Blob | DataType::Text)
+        );
         matches!(ty.0, DataType::Blob | DataType::Text)
     }
 }
@@ -37,6 +42,11 @@ impl Type<Sqlite> for Box<[u8]> {
     }
 
     fn compatible(ty: &SqliteTypeInfo) -> bool {
+        eprintln!(
+            "u8 compatible 2: {:?}: {:?}",
+            ty.0,
+            matches!(ty.0, DataType::Blob | DataType::Text)
+        );
         <&[u8] as Type<Sqlite>>::compatible(ty)
     }
 }
@@ -69,6 +79,7 @@ impl Type<Sqlite> for Vec<u8> {
     }
 
     fn compatible(ty: &SqliteTypeInfo) -> bool {
+        eprintln!("u8 compatible 3: {:?}", ty.0);
         <&[u8] as Type<Sqlite>>::compatible(ty)
     }
 }

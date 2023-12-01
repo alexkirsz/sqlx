@@ -11,6 +11,7 @@ impl Type<Sqlite> for i8 {
     }
 
     fn compatible(ty: &SqliteTypeInfo) -> bool {
+        eprintln!("i8 compatible: {:?}", ty.0);
         matches!(ty.0, DataType::Int | DataType::Int64)
     }
 }
@@ -35,6 +36,7 @@ impl Type<Sqlite> for i16 {
     }
 
     fn compatible(ty: &SqliteTypeInfo) -> bool {
+        eprintln!("i16 compatible: {:?}", ty.0);
         matches!(ty.0, DataType::Int | DataType::Int64)
     }
 }
@@ -59,6 +61,7 @@ impl Type<Sqlite> for i32 {
     }
 
     fn compatible(ty: &SqliteTypeInfo) -> bool {
+        eprintln!("i32 compatible: {:?}", ty.0);
         matches!(ty.0, DataType::Int | DataType::Int64)
     }
 }
@@ -83,6 +86,11 @@ impl Type<Sqlite> for i64 {
     }
 
     fn compatible(ty: &SqliteTypeInfo) -> bool {
+        eprintln!(
+            "i64 compatible: {:?}: {:?}",
+            ty.0,
+            matches!(ty.0, DataType::Int | DataType::Int64)
+        );
         matches!(ty.0, DataType::Int | DataType::Int64)
     }
 }
